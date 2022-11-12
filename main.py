@@ -62,35 +62,18 @@ def print_matrix(a, n):
             print()
 
 
-def l_order(a, n):
-    count = 0
-    for i in range(n):
-        j = i + i * n
-        print("i =", i)
-        # print("n * n - (2 + i) * n - i + 1 =", n * n - (2 + i) * n - i + 1)
-        # print("j =", j)
-        # print()
-        while j < n * n - n - i + 1:
-            print("j =",j, " & n * n - n - i + 1 = ",n * n - n - i + 1)
-            if j 
-            # print("n * n - (2 + i) * n + i + 1 =", n * n - (2 + i) * n + i + 1)
-            # print()
-            if a[j + i * n] <= a[j + (i + 1) * n]:
-                count += 1
-                print("done:", a[j], " <= ", a[j + n])
-                print()
-            else:
-                print("false:", a[j], " > ", a[j + n])
-            j += n
-        # if count !=  n - i - 1:
-        #     print("for i =", i, " return 0")
-        #     return 0
-        # else:
-        #     print("for i =", i, "count = 0")
-        #     count = 0
+def l_order(a, n):  # чтобы понять, упорядочены ли строки, сравним их попарно
+
+    for i in range(n - 1):  # берём i-ую строку (на последней итерации сравниваем предпоследнюю и последнюю строки)
+        for j in range(i * n, i * n + n - 1, 1):  # и сравниваем каждый j-ый элемент i-ой и i+1 строк
+            if a[j] < a[j + n]:  # если елемент i-ой строки меньше эл-та i+1 строки
+                break  # значит, строки i и i+1 упорядочены по возрастанию
+            elif a[j] == a[j + n]:  # если эл-ты в строках одинаковые
+                continue  # переходим к следующей итерации
+            elif a[j] > a[j + 1]:  # если элемент i-ой строки больше эл-та i+1
+                return 0  # значит, эти 2 строки упорядочены по убыванию, возращаем ноль
+
     return 1
-
-
 def main():
 
     [arr, n] = define_matrix("1.txt")
